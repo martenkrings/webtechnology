@@ -8,8 +8,8 @@ import java.io.IOException;
 /**
  * Created by Sander on 1-9-2016.
  */
-@WebServlet(name = "ShowPersonServlet")
-public class ShowPersonServlet extends HttpServlet {
+@WebServlet("/ShowPersonsServlet")
+public class ShowPersonsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
