@@ -4,14 +4,27 @@
     <meta charset="UTF-8">
     <title>Zoeken op M&S kamer verhuur</title>
 </head>
-<body>
-<p1>
-    Zoeken:
-</p1>
 <br>
-<input type="text" name="zoekAttributen">
-<button name="zoekKnop">
-    Zoek!
-</button>
+<body style="text-align:center;">
+<h1>Zoek naar een kamer</h1>
+<form>
+    <p1>Aantal personen:</p1>
+    <select name="zoekPersonen">
+        <option value="1 persoon">1 persoon</option>
+        <option value="2 personen">2 personen</option>
+        <option value="3 personen">3 personen</option>
+        <option value="4 personen">4 personen</option>
+        <option value="meer">meer</option>
+    </select><br>
+    <p2>Plaats</p2>
+    <input type="text" name="zoekPlaats"><br>
+    <p3>Min prijs</p3>
+    <input type="text" name="zoekMinPrijs"><br>
+    <p4>Max prijs</p4>
+    <input type="text" name="zoekMaxPrijs"><br>
+    <button name="zoekKnop">
+        Zoek!
+    </button>
+</form>
 </body>
 </html>
