@@ -1,7 +1,10 @@
 package Model;
 
 /**
- * Created by Gebruiker on 9/2/2016.
+ *
  */
 public class Kamer {
+    private double oppervlakte;
+    private double prijs;
+    private int kamers;
 }
