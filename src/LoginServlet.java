@@ -1,3 +1,4 @@
+import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +14,9 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String gebruikersnaam = request.getParameter("gebruikersnaam");
         String wachtwoord = request.getParameter("wachtwoord");
-        Boolean ingelogt = false;
+        Boolean ingelogd = false;
 
-        if (ingelogt){
+        if (ingelogd){
 
         } else {
 
