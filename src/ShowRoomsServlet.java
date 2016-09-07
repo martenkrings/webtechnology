@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Sander on 1-9-2016.
+ * Toont alle kamers van een verhuurder
  */
 @WebServlet("/ShowRoomsServlet")
 public class ShowRoomsServlet extends HttpServlet {

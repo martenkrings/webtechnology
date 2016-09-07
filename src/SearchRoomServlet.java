@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Sander on 1-9-2016.
+ * Toont kamers die voldoen aan het zoek criteria
  */
 @WebServlet("/SearchRoomServlet")
 public class SearchRoomServlet extends HttpServlet {

@@ -5,12 +5,13 @@
     <title>Log in</title>
 </head>
 <body>
-<form>
+<form action="/LoginServlet" method="post">
     Gebruikersnaam:<br>
     <input type="text" name="gebruikersnaam"><br>
     Wachtwoord:<br>
     <input type="password" name="wachtwoord"><br>
-    <button name="login">Log in</button>
+    <!--<button name="login">Log in</button>-->
+    <input type="submit" value="Submit">
     <br>
     <br>
     Nieuw? Registreer <a href="registreer.html"> hier.</a>

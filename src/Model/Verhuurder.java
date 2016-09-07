@@ -7,4 +7,8 @@ import java.util.ArrayList;
  */
 public class Verhuurder extends Gebruiker {
     private ArrayList<Kamer> kamers;
+
+    public Verhuurder(String gebruikersnaam, String wachtwoord) {
+        super(gebruikersnaam, wachtwoord);
+    }
 }

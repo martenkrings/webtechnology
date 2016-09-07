@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Gebruiker on 9/2/2016.
+ * Geeft een lijst van huurders en verhuurders indien ingelogt
  */
 @WebServlet("/ShowPersonsServlet")
 public class ShowPersonsServlet extends HttpServlet {
