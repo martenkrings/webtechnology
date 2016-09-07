@@ -5,14 +5,16 @@
     <title>Registreer</title>
 </head>
 <body>
-    <form>
+    <form action="" method="post">
         Gebruikersnaam:<br>
         <input type="text" name="gebruikersnaam"><br>
         Wachtwoord:<br>
         <input type="password" name="wachtwoord"><br>
         Wachtwoord herhalen:<br>
         <input type="password" name="herhaal"><br>
-        <button name="registeer">Registreer</button>
+        <input type="radio" name="functie" value="Huurder"> Huurder<br>
+        <input type="radio" name="functie" value="Verhuurder">Verhuurder<br>
+        <input type="submit" value="Submit">
     </form>
 </body>
 </html>

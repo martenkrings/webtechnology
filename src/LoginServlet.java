@@ -1,4 +1,5 @@
 import Model.Gebruiker;
+import Model.Huurder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextListener;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -17,16 +19,12 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String gebruikersnaam = request.getParameter("gebruikersnaam");
-        System.out.println(gebruikersnaam);
         String wachtwoord = request.getParameter("wachtwoord");
-        System.out.println(wachtwoord);
-        Boolean ingelogd = false;
         Gebruiker gebruiker;
         gebruiker = (Gebruiker)getServletContext().getAttribute(gebruikersnaam);
-        System.out.println(gebruiker);
 
         //als het wachtwoord niet overeen komt maak gebruiker weer null
-        if (gebruiker != null && gebruiker.getWachtwoord() != wachtwoord){
+        if (gebruiker != null && !gebruiker.getWachtwoord().equals(wachtwoord)){
             gebruiker = null;
         }
 
@@ -34,7 +32,13 @@ public class LoginServlet extends HttpServlet {
         if (gebruiker == null){
             response.sendRedirect("/fouteinlog.html");
         } else {
-
+            HttpSession session = request.getSession();
+            session.setAttribute("ingelogteGebruiker", gebruiker);
+            if (gebruiker instanceof Huurder){
+                response.sendRedirect("/huurderIndex.html");
+            } else {
+                response.sendRedirect("/verhuurderIndex.html");
+            }
         }
     }
 

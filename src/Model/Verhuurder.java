@@ -10,5 +10,14 @@ public class Verhuurder extends Gebruiker {
 
     public Verhuurder(String gebruikersnaam, String wachtwoord) {
         super(gebruikersnaam, wachtwoord);
+        kamers = new ArrayList<>();
+    }
+
+    public void addKamer(Kamer kamer){
+        kamers.add(kamer);
+    }
+
+    public ArrayList<Kamer> getKamers() {
+        return kamers;
     }
 }

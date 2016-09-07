@@ -7,20 +7,23 @@
 <br>
 <body style="text-align:center;">
 <h1>Zoek naar een kamer</h1>
-<form>
+<form action="/SearchRoomServlet" method="get">
     <p1>Aantal personen:</p1>
     <select name="zoekPersonen">
-        <option value="1 persoon">1 persoon</option>
-        <option value="2 personen">2 personen</option>
-        <option value="3 personen">3 personen</option>
-        <option value="4 personen">4 personen</option>
-        <option value="meer">meer</option>
+        <option value="1">1 persoon</option>
+        <option value="2">2 personen</option>
+        <option value="3">3 personen</option>
+        <option value="4">4 personen</option>
     </select><br>
-    <p2>Plaats</p2>
+    <p2>Minimale vierkante meters</p2>
+    <input type="number" name="zoekMinVierkanteMeters">
+    <p3>Maximale vierkante meters</p3>
+    <input type="number" name="zoekMaxVierkanteMeters"><br>
+    <p4>Plaats</p4>
     <input type="text" name="zoekPlaats"><br>
-    <p3>Min prijs</p3>
-    <input type="text" name="zoekMinPrijs"><br>
-    <p4>Max prijs</p4>
+    <p5>Min prijs</p5>
+    <input type="text" name="zoekMinPrijs">
+    <p6>Max prijs</p6>
     <input type="text" name="zoekMaxPrijs"><br>
     <button name="zoekKnop">
         Zoek!
