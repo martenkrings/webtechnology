@@ -50,13 +50,15 @@ public class SearchRoomServlet extends HttpServlet {
                 //schrijf de kamer naar de gebruiker
                 out.print("<h" + counter + ">" + kamer.getNaam() + "</h" + counter + "> \n"
                         + "<p" + counter + ">" + "Verhuurder: " + kamer.getVerhuurder().getGebruikersnaam() + "<br>"
-                        + "Prijs: " + kamer.getPrijs() + "<br>"
-                        + "Oppervlakte: " + kamer.getOppervlakte() + "<br>"
+                        + "Prijs: &#8364;" + kamer.getPrijs() + "<br>"
+                        + "Oppervlakte: " + kamer.getOppervlakte() + "m²<br>"
                         + "personen: " + kamer.getAantalPersonen() + "<br>"
                         + "plaats: " + kamer.getPlaats() + "<br><br>");
             }
         }
-        if (counter == 0){
+
+        //als er geen zoek resultaten zijn print dat dan naar de gebruiker
+        if (counter == 0) {
             out.print("<h1>Helaas! geen resultaten gevonden </h1>");
         }
         //eindig de html
