@@ -43,7 +43,7 @@ public class SearchRoomServlet extends HttpServlet {
 
         //kijk welke kamers er aan het zoek criteria voldoen
         for (Kamer kamer : kamers) {
-            if (kamer.getAantalPersonen() != aantalPersonen || kamer.getOppervlakte() < minVierkanteMeters || kamer.getOppervlakte() > maxVierkanteMeters || kamer.getPrijs() < minPrijs || kamer.getPrijs() > maxPrijs || kamer.getAantalPersonen() != aantalPersonen) {
+            if (kamer.getAantalPersonen() != aantalPersonen || kamer.getOppervlakte() < minVierkanteMeters || kamer.getOppervlakte() > maxVierkanteMeters || kamer.getPrijs() < minPrijs || kamer.getPrijs() > maxPrijs || kamer.getAantalPersonen() != aantalPersonen || !kamer.getPlaats().equalsIgnoreCase(plaats)) {
                 //do nothing
             } else {
                 counter++;

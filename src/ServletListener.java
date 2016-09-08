@@ -25,6 +25,7 @@ public class ServletListener implements ServletContextListener {
         verhuurders = new ArrayList<>();
         kamers = new ArrayList<>();
 
+        //dummy data
         Huurder testHuurder = new Huurder("Sander", "wachtwoord");
         Verhuurder testVerhuurder = new Verhuurder("Marten", "wachtwoord");
         Kamer testkamer = new Kamer("Kamer met uitzicht op deventer kerk",testVerhuurder, "Deventer", 15, 2, 450);
@@ -34,6 +35,7 @@ public class ServletListener implements ServletContextListener {
         verhuurders.add(testVerhuurder);
         kamers.add(testkamer);
 
+        //dummy data toevoegen
         context = servletContextEvent.getServletContext();
         context.setAttribute("Sander", testHuurder);
         context.setAttribute("Marten", testVerhuurder);
