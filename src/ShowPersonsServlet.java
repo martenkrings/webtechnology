@@ -26,14 +26,28 @@ public class ShowPersonsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         gebruikers = (ArrayList<Gebruiker>) getServletContext().getAttribute("gebruikers");
 
+        HttpSession session = request.getSession();
+        Gebruiker ingelogteGebruiker = (Gebruiker) session.getAttribute("ingelogteGebruiker");
+
+        //zorg dat we kunnen schrijven naar de gebruiker
         PrintWriter out = response.getWriter();
         out.print("<!doctype html\">\n"
                 + "<html>\n"
                 + "<head><title>Beheer</title></head>\n"
-                + "<body>\n"
-                + "<h1>Huurders</h1>"
-                + "<ul style=\"list-style-type:none\">");
+                + "<body>"
+        );
 
+        //alleen ingelogte gebruikers mogen hier komen
+        if (ingelogteGebruiker == null){
+            out.print("<h1>Access Denied</h1>"
+                    + "</body></html>");
+            return;
+        }
+
+        //start de list in de html
+        out.print("<h1>Huurders</h1>");
+
+        //print de gebruiker informatie
         for (Gebruiker gebruiker : gebruikers) {
             if (gebruiker instanceof Verhuurder) {
                 out.print("Verhuurder: <br>" +

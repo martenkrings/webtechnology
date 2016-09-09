@@ -21,14 +21,21 @@ public class ShowRoomsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //haal de gebruiker op
         HttpSession session = request.getSession();
         Gebruiker gebruiker = (Gebruiker) session.getAttribute("ingelogteGebruiker");
+
+        //zorg dat we kunnen schrijven naar de gebruiker
+        PrintWriter out = response.getWriter();
+        out.println("<!doctype html\">\n"
+                + "<html>\n"
+                + "<head><title>Acces Denied</title></head>\n"
+                + "<body>");
+
+        //alleen verhuurders hebben toegang tot deze pagina
         if (gebruiker instanceof Huurder){
-            PrintWriter out = response.getWriter();
-            out.println("<!doctype html\">\n"
-            + "<html>\n"
-            + "<head><title>Acces Denied</title></head>\n"
-            + "<body>Acces Denied</body></html>");
+            out.print("<h1>Acces Denied</h1></body></html>");
+            return;
         }
     }
 }
