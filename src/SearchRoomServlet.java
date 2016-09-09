@@ -49,6 +49,13 @@ public class SearchRoomServlet extends HttpServlet {
             return;
         }
 
+        //geen negatiefe velden of max > min
+        if (Integer.parseInt(request.getParameter("zoekMinVierkanteMeters")) < 0 || Integer.parseInt(request.getParameter("zoekMinPrijs")) < 0 || Integer.parseInt(request.getParameter("zoekMinVierkanteMeters")) > Integer.parseInt(request.getParameter("zoekMaxVierkanteMeters"))|| Integer.parseInt(request.getParameter("zoekMinPrijs")) > Integer.parseInt(request.getParameter("zoekMaxPrijs"))){
+            out.print("<h1>Foute invoer!</h1>"
+                    + "</body></html>");
+            return;
+        }
+
         //de zoek criteria
         Integer minVierkanteMeters = Integer.parseInt(request.getParameter("zoekMinVierkanteMeters"));
         Integer maxVierkanteMeters = Integer.parseInt(request.getParameter("zoekMaxVierkanteMeters"));
@@ -70,18 +77,18 @@ public class SearchRoomServlet extends HttpServlet {
             } else {
                 counter++;
                 //schrijf de kamer naar de gebruiker
-                out.print("<h" + counter + ">" + kamer.getNaam() + "</h" + counter + "> \n"
-                        + "<p" + counter + ">" + "Verhuurder: " + kamer.getVerhuurder().getGebruikersnaam() + "<br>"
+                out.print("<h1>" + kamer.getNaam() + "</h1> \n"
+                        + "<p1>" + "Verhuurder: " + kamer.getVerhuurder().getGebruikersnaam() + "<br>"
                         + "Prijs: &#8364;" + kamer.getPrijs() + "<br>"
                         + "Oppervlakte: " + kamer.getOppervlakte() + "m²<br>"
                         + "personen: " + kamer.getAantalPersonen() + "<br>"
-                        + "plaats: " + kamer.getPlaats() + "<br><br>");
+                        + "plaats: " + kamer.getPlaats() + "</p1><br><br>");
             }
         }
 
         //als er geen zoek resultaten zijn print dat dan naar de gebruiker
         if (counter == 0) {
-            out.print("<h1>Helaas! geen resultaten gevonden </h1>");
+            out.print("<h1>Helaas! Geen resultaten gevonden </h1>");
         }
 
         //eindig de html
