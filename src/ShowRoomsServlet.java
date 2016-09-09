@@ -34,7 +34,7 @@ public class ShowRoomsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<!doctype html\">\n"
                 + "<html>\n"
-                + "<head><title>Acces Denied</title></head>\n"
+                + "<head><title>Mijn Kamers</title></head>\n"
                 + "<body>");
 
         //alleen verhuurders hebben toegang tot deze pagina
@@ -43,13 +43,7 @@ public class ShowRoomsServlet extends HttpServlet {
             return;
         }
 
-        /*
-        //Forward to addroom
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/addroom.html");
-        dispatcher.forward(request,response);
-        */
-
-        out.print("<a style=\"font-size:200%;\" href=\"/addroom.html\">addroom</a> <br><br>");
+        out.print("<a style=\"font-size:200%;\" href=\"/AddRoomServlet\">addroom</a> <br><br>");
         kamers = ((Verhuurder) gebruiker).getKamers();
 
         for (Kamer kamer : kamers) {

@@ -8,23 +8,23 @@
 <br>
 <br>
 <br>
-<form action="" method="post" style="text-align:center; ">
-    <p1>
-        Oppervlakte
-    </p1>
-    <br>
-    <input type="text" name="oppervlakte">
-    <br>
-    <p1>
-        Prijs
-    </p1>
-    <br>
-    <input type="text" name="prijs">
-    <br>
-    <button name="verhuurKnop">
-        Verhuren!
-    </button>
-
+<form action="/AddRoomServlet" method="post" style="text-align:center; ">
+    <p1>Naam</p1>
+    <input type="text" name="naam"><br>
+    <p1>Plaats</p1>
+    <input type="text" name="plaats"><br>
+    <p1>Aantal personen:</p1>
+    <select name="aantalPersonen">
+        <option value="1">1 persoon</option>
+        <option value="2">2 personen</option>
+        <option value="3">3 personen</option>
+        <option value="4">4 personen</option>
+    </select><br>
+    <p1>Prijs</p1>
+    <input type="number" name="prijs"><br>
+    <p1>Oppervlakte</p1>
+    <input type="number" name="oppervlakte">
+    <button>Verhuur</button>
 </form>
 </body>
 </html>
