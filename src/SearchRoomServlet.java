@@ -35,25 +35,31 @@ public class SearchRoomServlet extends HttpServlet {
         );
 
         //alleen ingelogte gebruikers mogen hier komen
-        if (ingelogteGebruiker == null){
+        if (ingelogteGebruiker == null) {
             out.print("<h1>Access Denied</h1>"
-            + "</body></html>");
+                    + "</body></html>");
+            return;
+        }
+
+        //geen lege velden
+        if (request.getParameter("zoekMinVierkanteMeters") == "" || request.getParameter("zoekMaxVierkanteMeters") == "" || request.getParameter("zoekMinPrijs") == "" || request.getParameter("zoekMaxPrijs") == "" || request.getParameter("zoekPlaats") == ""){
+            out.print("<h1>Niet alle velden gevuld!</h1>"
+                    + "</body></html>");
             return;
         }
 
         //de zoek criteria
-        int minVierkanteMeters = Integer.parseInt(request.getParameter("zoekMinVierkanteMeters"));
-        int maxVierkanteMeters = Integer.parseInt(request.getParameter("zoekMaxVierkanteMeters"));
-        String plaats = (String) request.getParameter("zoekPlaats");
-        int minPrijs = Integer.parseInt(request.getParameter("zoekMinPrijs"));
-        int maxPrijs = Integer.parseInt(request.getParameter("zoekMaxPrijs"));
+        Integer minVierkanteMeters = Integer.parseInt(request.getParameter("zoekMinVierkanteMeters"));
+        Integer maxVierkanteMeters = Integer.parseInt(request.getParameter("zoekMaxVierkanteMeters"));
+        String plaats = request.getParameter("zoekPlaats");
+        Integer minPrijs = Integer.parseInt(request.getParameter("zoekMinPrijs"));
+        Integer maxPrijs = Integer.parseInt(request.getParameter("zoekMaxPrijs"));
         int aantalPersonen = Integer.parseInt(request.getParameter("zoekPersonen"));
 
         //haal alle kamers op
         kamers = (ArrayList<Kamer>) request.getServletContext().getAttribute("kamers");
 
-
-
+        //counter
         int counter = 0;
 
         //kijk welke kamers er aan het zoek criteria voldoen
@@ -76,6 +82,7 @@ public class SearchRoomServlet extends HttpServlet {
         if (counter == 0) {
             out.print("<h1>Helaas! geen resultaten gevonden </h1>");
         }
+
         //eindig de html
         out.print("</body></html>");
     }

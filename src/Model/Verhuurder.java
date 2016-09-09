@@ -13,11 +13,13 @@ public class Verhuurder extends Gebruiker {
         kamers = new ArrayList<>();
     }
 
-    public void addKamer(Kamer kamer){
+    public void addKamer(Kamer kamer) {
         kamers.add(kamer);
     }
 
     public ArrayList<Kamer> getKamers() {
         return kamers;
     }
+
+
 }

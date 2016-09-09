@@ -1,6 +1,7 @@
 import Model.Gebruiker;
 import Model.Huurder;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
@@ -18,34 +19,45 @@ import java.util.ArrayList;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     ArrayList<Gebruiker> gebruikers;
+    Gebruiker ingelogteGebruiker;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        ingelogteGebruiker = null;
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        gebruikers = (ArrayList<Gebruiker>)getServletContext().getAttribute("gebruikers");
+        gebruikers = (ArrayList<Gebruiker>) getServletContext().getAttribute("gebruikers");
         String gebruikersnaam = request.getParameter("gebruikersnaam");
         String wachtwoord = request.getParameter("wachtwoord");
-        Gebruiker ingelogteGebruiker = null;
 
-        for (Gebruiker gebruiker:gebruikers){
-            if (gebruiker.getGebruikersnaam().equals(gebruikersnaam)){
+
+        for (Gebruiker gebruiker : gebruikers) {
+            if (gebruiker.getGebruikersnaam().equals(gebruikersnaam)) {
                 ingelogteGebruiker = gebruiker;
             }
         }
 
         //als het wachtwoord niet overeen komt maak gebruiker weer null
-        if (ingelogteGebruiker != null && !ingelogteGebruiker.getWachtwoord().equals(wachtwoord)){
+        if (ingelogteGebruiker != null && !ingelogteGebruiker.getWachtwoord().equals(wachtwoord)) {
             ingelogteGebruiker = null;
         }
 
+        RequestDispatcher dispatcher;
+
         //als gebruiker null is dan is er een foute login poging
-        if (ingelogteGebruiker == null){
+        if (ingelogteGebruiker == null) {
             response.sendRedirect("/fouteinlog.html");
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("ingelogteGebruiker", ingelogteGebruiker);
-            if (ingelogteGebruiker instanceof Huurder){
-                response.sendRedirect("/huurderIndex.html");
+            if (ingelogteGebruiker instanceof Huurder) {
+                dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/huurderIndex.html");
+                dispatcher.forward(request, response);
             } else {
-                response.sendRedirect("/verhuurderIndex.html");
+                dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/verhuurderIndex.html");
+                dispatcher.forward(request, response);
             }
         }
     }

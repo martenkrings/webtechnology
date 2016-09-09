@@ -39,7 +39,7 @@ public class ShowPersonsServlet extends HttpServlet {
         );
 
         //alleen ingelogte gebruikers mogen hier komen
-        if (ingelogteGebruiker == null){
+        if (ingelogteGebruiker == null) {
             out.print("<h1>Access Denied</h1>"
                     + "</body></html>");
             return;
@@ -49,11 +49,11 @@ public class ShowPersonsServlet extends HttpServlet {
         Cookie lastDateBeenHereCookie = null;
 
         Cookie[] cookieArray = request.getCookies();
-        for (Cookie cookie:cookieArray){
-            if (cookie.getName().equals("timesBeenHere")){
+        for (Cookie cookie : cookieArray) {
+            if (cookie.getName().equals("timesBeenHere")) {
                 timesBeenHereCookie = cookie;
             }
-            if (cookie.getName().equals("lastDateBeenHere")){
+            if (cookie.getName().equals("lastDateBeenHere")) {
                 lastDateBeenHereCookie = cookie;
             }
         }
@@ -61,12 +61,12 @@ public class ShowPersonsServlet extends HttpServlet {
         //store cookie data or fill with 0/nvt
         String timesHereString = null;
         if (timesBeenHereCookie != null) {
-             timesHereString = timesBeenHereCookie.getValue();
+            timesHereString = timesBeenHereCookie.getValue();
         } else {
             timesHereString = 0 + "";
         }
         String dateHereString = null;
-        if (lastDateBeenHereCookie != null){
+        if (lastDateBeenHereCookie != null) {
             dateHereString = lastDateBeenHereCookie.getValue();
         } else {
             dateHereString = "NVT";
@@ -105,8 +105,7 @@ public class ShowPersonsServlet extends HttpServlet {
         lastDateBeenHereCookie = new Cookie("lastDateBeenHere", dateString + "");
         response.addCookie(lastDateBeenHereCookie);
 
-        out.print("</ul><br>");
-
-        out.print("</body></head></html>");
+        //eindig de html
+        out.print("</ul></body></head></html>");
     }
 }
