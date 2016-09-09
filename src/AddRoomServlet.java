@@ -20,24 +20,45 @@ import java.util.ArrayList;
 @WebServlet("/AddRoomServlet")
 public class AddRoomServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("I'm gonna Post!!!!!!!");
         //haal de gebruiker op
         HttpSession session = request.getSession();
         Verhuurder verhuurder = (Verhuurder) session.getAttribute("ingelogteGebruiker");
 
         ArrayList<Kamer> kamers = (ArrayList<Kamer>) getServletContext().getAttribute("kamers");
 
-        //maak nieuwe kamer
-        String naam = request.getParameter("naam");
-        String plaats = request.getParameter("plaats");
-        Double oppervlakte = Double.parseDouble(request.getParameter("oppervlakte"));
-        int personen = Integer.parseInt(request.getParameter("aantalPersonen"));
-        Double prijs = Double.parseDouble(request.getParameter("prijs"));
+        if (!request.getParameter("naam").isEmpty() && !request.getParameter("plaats").isEmpty() &&
+                !request.getParameter("oppervlakte").isEmpty() && !request.getParameter("aantalPersonen").isEmpty() &&
+                !request.getParameter("prijs").isEmpty() &&
+                (Double.parseDouble(request.getParameter("oppervlakte")) > 0) &&
+                (Double.parseDouble(request.getParameter("prijs")) > 0)) {
 
-        Kamer k = new Kamer(naam, verhuurder, plaats, oppervlakte, personen, prijs);
-        kamers.add(k);
+            //maak nieuwe kamer
+            String naam = request.getParameter("naam");
+            String plaats = request.getParameter("plaats");
+            Double oppervlakte = Double.parseDouble(request.getParameter("oppervlakte"));
+            int personen = Integer.parseInt(request.getParameter("aantalPersonen"));
+            Double prijs = Double.parseDouble(request.getParameter("prijs"));
 
-        //vervang data
-        getServletContext().setAttribute("kamers", kamers);
+            Kamer k = new Kamer(naam, verhuurder, plaats, oppervlakte, personen, prijs);
+            kamers.add(k);
+
+            //vervang data
+            getServletContext().removeAttribute("kamers");
+            getServletContext().setAttribute("kamers", kamers);
+
+            //forward naar ShowRoomsServlet
+            RequestDispatcher dispatcher;
+            dispatcher = getServletContext().getRequestDispatcher("/ShowRoomsServlet");
+            dispatcher.forward(request, response);
+        } else {
+            PrintWriter out = response.getWriter();
+            out.println("<!doctype html\">\n"
+                    + "<html>\n"
+                    + "<head><title>Foute Invoer</title></head>\n"
+                    + "<body>"
+                    + "<h1>Foute Invoer</h1></body></html>");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
