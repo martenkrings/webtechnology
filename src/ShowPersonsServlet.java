@@ -4,13 +4,14 @@ import Model.Verhuurder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Geeft een lijst van huurders en verhuurders indien ingelogt
@@ -44,8 +45,36 @@ public class ShowPersonsServlet extends HttpServlet {
             return;
         }
 
-        //start de list in de html
-        out.print("<h1>Huurders</h1>");
+        Cookie timesBeenHereCookie = null;
+        Cookie lastDateBeenHereCookie = null;
+
+        Cookie[] cookieArray = request.getCookies();
+        for (Cookie cookie:cookieArray){
+            if (cookie.getName().equals("timesBeenHere")){
+                timesBeenHereCookie = cookie;
+            }
+            if (cookie.getName().equals("lastDateBeenHere")){
+                lastDateBeenHereCookie = cookie;
+            }
+        }
+
+        //store cookie data or fill with 0/nvt
+        String timesHereString = null;
+        if (timesBeenHereCookie != null) {
+             timesHereString = timesBeenHereCookie.getValue();
+        } else {
+            timesHereString = 0 + "";
+        }
+        String dateHereString = null;
+        if (lastDateBeenHereCookie != null){
+            dateHereString = lastDateBeenHereCookie.getValue();
+        } else {
+            dateHereString = "NVT";
+        }
+
+        //print de cookie data
+        out.print("<h1>Times been here: " + timesHereString + "<br>"
+                + "Last date been here: " + dateHereString + "</h1>");
 
         //print de gebruiker informatie
         for (Gebruiker gebruiker : gebruikers) {
@@ -57,6 +86,25 @@ public class ShowPersonsServlet extends HttpServlet {
                         + "Gebruikersnaam: " + gebruiker.getGebruikersnaam() + "<br><br>");
             }
         }
+
+        //verhoog de timesBeenHereCookie
+        if (timesBeenHereCookie == null) {
+            timesBeenHereCookie = new Cookie("timesBeenHere", "1");
+        } else {
+            int counter = Integer.parseInt(timesBeenHereCookie.getValue());
+            counter++;
+            timesBeenHereCookie.setValue(counter + "");
+        }
+        response.addCookie(timesBeenHereCookie);
+
+        //make new date object
+        Date date = new Date();
+        String dateString = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(date);
+
+        //replace old date with new date
+        lastDateBeenHereCookie = new Cookie("lastDateBeenHere", dateString + "");
+        response.addCookie(lastDateBeenHereCookie);
+
         out.print("</ul><br>");
 
         out.print("</body></head></html>");
