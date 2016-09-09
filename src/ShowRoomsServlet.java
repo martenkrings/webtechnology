@@ -1,4 +1,5 @@
 import Model.Gebruiker;
+import Model.Huurder;
 import Model.Verhuurder;
 
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ public class ShowRoomsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Gebruiker gebruiker = (Gebruiker) session.getAttribute("ingelogteGebruiker");
-        if (gebruiker instanceof Gebruiker){
+        if (gebruiker instanceof Huurder){
             PrintWriter out = response.getWriter();
             out.println("<!doctype html\">\n"
             + "<html>\n"
