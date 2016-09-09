@@ -57,11 +57,11 @@ public class SearchRoomServlet extends HttpServlet {
         }
 
         //de zoek criteria
-        Integer minVierkanteMeters = Integer.parseInt(request.getParameter("zoekMinVierkanteMeters"));
-        Integer maxVierkanteMeters = Integer.parseInt(request.getParameter("zoekMaxVierkanteMeters"));
+        Double minVierkanteMeters = Double.parseDouble(request.getParameter("zoekMinVierkanteMeters"));
+        Double maxVierkanteMeters = Double.parseDouble(request.getParameter("zoekMaxVierkanteMeters"));
         String plaats = request.getParameter("zoekPlaats");
-        Integer minPrijs = Integer.parseInt(request.getParameter("zoekMinPrijs"));
-        Integer maxPrijs = Integer.parseInt(request.getParameter("zoekMaxPrijs"));
+        Double minPrijs = Double.parseDouble(request.getParameter("zoekMinPrijs"));
+        Double maxPrijs = Double.parseDouble(request.getParameter("zoekMaxPrijs"));
         int aantalPersonen = Integer.parseInt(request.getParameter("zoekPersonen"));
 
         //haal alle kamers op
