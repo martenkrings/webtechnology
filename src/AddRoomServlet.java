@@ -20,7 +20,7 @@ import java.util.ArrayList;
 @WebServlet("/AddRoomServlet")
 public class AddRoomServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("I'm gonna Post!!!!!!!");
+
         //haal de gebruiker op
         HttpSession session = request.getSession();
         Verhuurder verhuurder = (Verhuurder) session.getAttribute("ingelogteGebruiker");
@@ -43,14 +43,15 @@ public class AddRoomServlet extends HttpServlet {
             Kamer k = new Kamer(naam, verhuurder, plaats, oppervlakte, personen, prijs);
             kamers.add(k);
 
+            System.out.println(kamers.toString());
+
             //vervang data
             getServletContext().removeAttribute("kamers");
             getServletContext().setAttribute("kamers", kamers);
-
+            System.out.println("I'm gonna Post!!!!!!!");
             //forward naar ShowRoomsServlet
-            RequestDispatcher dispatcher;
-            dispatcher = getServletContext().getRequestDispatcher("/ShowRoomsServlet");
-            dispatcher.forward(request, response);
+            response.sendRedirect("/ShowRoomsServlet");
+            System.out.println("I'm gonna Post!!!!!!!");
         } else {
             PrintWriter out = response.getWriter();
             out.println("<!doctype html\">\n"

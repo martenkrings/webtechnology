@@ -48,9 +48,6 @@ public class ServletListener implements ServletContextListener {
         Kamer testKamer = new Kamer("Kamer met uitzicht op deventer kerk", testVerhuurder, "Deventer", 15, 2, 450);
         Kamer testKamer2 = new Kamer("Kamer in de binnenstad", testVerhuurder, "Deventer", 24, 2, 575);
         Kamer testKamer3 = new Kamer("Kamer die je niet wil hebben", testVerhuurder2, "Enschede", 5, 4, 1000);
-        testVerhuurder.addKamer(testKamer);
-        testVerhuurder.addKamer(testKamer2);
-        testVerhuurder2.addKamer(testKamer3);
 
         gebruikers.add(testHuurder);
         gebruikers.add(testHuurder2);

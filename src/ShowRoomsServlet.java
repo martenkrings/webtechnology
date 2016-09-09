@@ -44,7 +44,12 @@ public class ShowRoomsServlet extends HttpServlet {
         }
 
         out.print("<a style=\"font-size:200%;\" href=\"/AddRoomServlet\">addroom</a> <br><br>");
-        kamers = ((Verhuurder) gebruiker).getKamers();
+        kamers = new ArrayList<>();
+        for (Kamer k : (ArrayList<Kamer>) getServletContext().getAttribute("kamers")) {
+            if (k.getVerhuurder().equals(gebruiker)) {
+                kamers.add(k);
+            }
+        }
 
         for (Kamer kamer : kamers) {
             out.print(kamer.getNaam() + "<br>"
